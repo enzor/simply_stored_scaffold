@@ -1,1 +1,5 @@
-0.0.0
+0.1.0
+
+Simply_stored_scaffold created!
+Supports only 2.3.x rails version for now, i'll add support for Rails 3.0 soon.
+Only cucumber tests are included, to add Test::Unit tests in future

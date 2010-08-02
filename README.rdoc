@@ -1,9 +1,33 @@
 = simply_stored_scaffold
 
-Description goes here.
+This is a simple scaffold generator for Rails developer who uses CouchDB with couchrest, couch_potato and simply_stored.
+At the moment only Rails 2.3.x is supported. Rails 3.0 support will come soon(tm)
+
+== Installation
+  
+  gem install simply_stored_scaffold
+  
+== Configuration
+
+Once you install the gem, the generators will be available to all Rails applications on your system.
+
+== Simple usage
+
+Pass the name of the model, either CamelCased or under_scored, as the first
+argument along with an optional list of attribute pairs and controller actions.
+
+  script/generate simply_stored_scaffold Model column_name:type 
+      
+    Will create a controller it will contain all seven
+    CRUD actions along with the views. A model will be created with the attributes inside
+  
+  script/generate simply_storedd_scaffold post name:string content:text 
+      
+      Will create a Post model with  with the name and content 
+      properties with all seven CRUD action
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a

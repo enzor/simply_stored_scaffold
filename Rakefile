@@ -1,16 +1,24 @@
 require 'rubygems'
 require 'rake'
+require 'rake/testtask'
+require 'cucumber'
+require 'cucumber/rake/task'
 
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "simply_stored_scaffold"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = "A simple scaffold generator for simply_stored"
+    gem.description = "A simple scaffold generator for Couchrest + couch_potato + simply_stored combo interface for Rails to CouchDB"
     gem.email = "vincenzo.rivello@gmail.com"
     gem.homepage = "http://github.com/enzor/simply_stored_scaffold"
     gem.authors = ["Vincenzo Rivello"]
+    gem.files = FileList['rails_generators/**/**/**/**']
+    gem.test_files = FileList['features/**/**']
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
+    gem.add_dependency("couchrest",">= 0.37")
+    gem.add_dependency("couch_potato",">= 0.3.0")
+    gem.add_dependency("simply_stored", ">= 0.3.6")
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
@@ -18,29 +26,20 @@ rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
 end
 
-require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
   test.pattern = 'test/**/test_*.rb'
   test.verbose = true
 end
 
-begin
-  require 'rcov/rcovtask'
-  Rcov::RcovTask.new do |test|
-    test.libs << 'test'
-    test.pattern = 'test/**/test_*.rb'
-    test.verbose = true
-  end
-rescue LoadError
-  task :rcov do
-    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
-  end
+Cucumber::Rake::Task.new(:features) do |t|
+  t.cucumber_opts = "features --format progress"
 end
+
 
 task :test => :check_dependencies
 
-task :default => :test
+task :default => [:features]
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
