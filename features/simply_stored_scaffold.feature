@@ -15,7 +15,7 @@ Scenario: generate a scaffold for couchdb
 	| app/views/books/_form.html.erb |
 	| app/views/books/new.html.erb |
 	| app/views/books/show.html.erb |
-	| spec/models/books_spec.rb |
+	| spec/models/book_spec.rb |
 	| spec/controllers/books_controller_spec.rb |
   And I should see "map.resources :books" in file "config/routes.rb"
   And I should see "property :title , :type => String" in file "app/models/book.rb"

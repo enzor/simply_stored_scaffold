@@ -27,13 +27,13 @@ class SimplyStoredScaffoldGenerator < Rails::Generator::Base
       m.template('views/edit.html.erb',"app/views/#{name.downcase.underscore.pluralize}/edit.html.erb")
       m.template('views/_form.html.erb',"app/views/#{name.downcase.underscore.pluralize}/_form.html.erb")
       m.template("views/show.html.erb", "app/views/#{name.downcase.underscore.pluralize}/show.html.erb")
+      m.route_resources name.downcase.pluralize
       m.directory("spec/models")
       m.template("tests/rspec/model.rb","spec/models/#{name.underscore.downcase}_spec.rb")
       m.directory("spec/fixtures")
       m.template("fixtures.yml","spec/fixtures/#{name.underscore.downcase.pluralize}.yml")
       m.directory("spec/controllers")
-      m.template("tests/rspec/controller.rb","spec/models/#{name.underscore.downcase.pluralize}_controller_spec.rb")
-      m.route_resources name.downcase.pluralize
+      m.template("tests/rspec/controller.rb","spec/controllers/#{name.underscore.downcase.pluralize}_controller_spec.rb")
     end
   end
   
