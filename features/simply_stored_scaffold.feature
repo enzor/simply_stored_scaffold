@@ -5,7 +5,8 @@ Feature: Simply stored scaffold
 
 Scenario: generate a scaffold for couchdb
   Given a new Rails app
-  When I run "script/generate simply_stored_scaffold book title:string description:text published:boolean"
+  When I run "script/generate rspec"
+  And I run "script/generate simply_stored_scaffold book title:string description:text published:boolean"
   Then I should see the following files
 	| app/models/book.rb |
 	| app/controllers/books_controller.rb |
@@ -14,11 +15,12 @@ Scenario: generate a scaffold for couchdb
 	| app/views/books/_form.html.erb |
 	| app/views/books/new.html.erb |
 	| app/views/books/show.html.erb |
+	| spec/models/books_spec.rb |
+	| spec/controllers/books_controller_spec.rb |
   And I should see "map.resources :books" in file "config/routes.rb"
   And I should see "property :title , :type => String" in file "app/models/book.rb"
   And I should see "property :description" in file "app/models/book.rb"
   And I should see "property :published , :type => :boolean" in file "app/models/book.rb"
-  Then I should successfully run "rake test"
 
 
 

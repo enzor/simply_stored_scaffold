@@ -32,7 +32,7 @@ class SimplyStoredScaffoldGenerator < Rails::Generator::Base
       m.directory("spec/fixtures")
       m.template("fixtures.yml","spec/fixtures/#{name.underscore.downcase.pluralize}.yml")
       m.directory("spec/controllers")
-      m.template("tests/rspec/controller.rb","spec/models/#{name.underscore.downcase.pluralize}_spec.rb")
+      m.template("tests/rspec/controller.rb","spec/models/#{name.underscore.downcase.pluralize}_controller_spec.rb")
       m.route_resources name.downcase.pluralize
     end
   end

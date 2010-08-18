@@ -1,0 +1,9 @@
+one:
+<%- for attribute in attributes -%>
+  <%= attribute[0] %>: 
+<%- end -%>
+
+two:
+<%- for attribute in attributes -%>
+  <%= attribute[0] %>: 
+<%- end -%>
