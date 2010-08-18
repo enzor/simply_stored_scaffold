@@ -18,15 +18,21 @@ class SimplyStoredScaffoldGenerator < Rails::Generator::Base
    
   def manifest
     record do |m|
-      m.template('controller.rb', "app/controllers/#{name.downcase.pluralize}_controller.rb")
-      m.template('helper.rb',"app/helpers/#{name.downcase}_helper.rb" )
-      m.template('model.rb',"app/models/#{name.downcase}.rb")
-      m.directory("app/views/#{name.downcase.pluralize}")
-      m.template('views/index.html.erb',"app/views/#{name.downcase.pluralize}/index.html.erb")
-      m.template('views/new.html.erb',"app/views/#{name.downcase.pluralize}/new.html.erb")
-      m.template('views/edit.html.erb',"app/views/#{name.downcase.pluralize}/edit.html.erb")
-      m.template('views/_form.html.erb',"app/views/#{name.downcase.pluralize}/_form.html.erb")
-      m.template("views/show.html.erb", "app/views/#{name.downcase.pluralize}/show.html.erb")
+      m.template('controller.rb', "app/controllers/#{name.underscore.downcase.pluralize}_controller.rb")
+      m.template('helper.rb',"app/helpers/#{name.underscore.downcase}_helper.rb" )
+      m.template('model.rb',"app/models/#{name.underscore.downcase}.rb")
+      m.directory("app/views/#{name.underscore.downcase.pluralize}")
+      m.template('views/index.html.erb',"app/views/#{name.downcase.underscore.pluralize}/index.html.erb")
+      m.template('views/new.html.erb',"app/views/#{name.downcase.underscore.pluralize}/new.html.erb")
+      m.template('views/edit.html.erb',"app/views/#{name.downcase.underscore.pluralize}/edit.html.erb")
+      m.template('views/_form.html.erb',"app/views/#{name.downcase.underscore.pluralize}/_form.html.erb")
+      m.template("views/show.html.erb", "app/views/#{name.downcase.underscore.pluralize}/show.html.erb")
+      m.directory("spec/models")
+      m.template("tests/rspec/model.rb","spec/models/#{name.underscore.downcase}_spec.rb")
+      m.directory("spec/fixtures")
+      m.template("fixtures.yml","spec/fixtures/#{name.underscore.downcase.pluralize}.yml")
+      m.directory("spec/controllers")
+      m.template("tests/rspec/controller.rb","spec/models/#{name.underscore.downcase.pluralize}_spec.rb")
       m.route_resources name.downcase.pluralize
     end
   end
@@ -68,6 +74,13 @@ class SimplyStoredScaffoldGenerator < Rails::Generator::Base
          :text_field
      end      
   end
+  
+  def controller_methods(dir_name)
+    controller_actions.map do |action|
+      read_template("#{dir_name}/#{action}.rb")
+    end.join("  \n").strip
+  end
+  
   
   
 end

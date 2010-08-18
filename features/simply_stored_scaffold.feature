@@ -18,6 +18,7 @@ Scenario: generate a scaffold for couchdb
   And I should see "property :title , :type => String" in file "app/models/book.rb"
   And I should see "property :description" in file "app/models/book.rb"
   And I should see "property :published , :type => :boolean" in file "app/models/book.rb"
+  Then I should successfully run "rake test"
 
 
 

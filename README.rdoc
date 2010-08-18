@@ -18,8 +18,8 @@ argument along with an optional list of attribute pairs and controller actions.
 
   script/generate simply_stored_scaffold Model column_name:type 
       
-    Will create a controller it will contain all seven
-    CRUD actions along with the views. A model will be created with the attributes inside
+    Will create a controller withhall seven CRUD actions along with the views. 
+    A model will be created with the attributes inside
   
   script/generate simply_storedd_scaffold post name:string content:text 
       
