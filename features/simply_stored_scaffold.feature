@@ -6,6 +6,8 @@ Feature: Simply stored scaffold
 Scenario: generate a scaffold for couchdb
   Given a new Rails app
   When I run "script/generate rspec"
+  And I run "script/generate cucumber --rspec --webrat"
+  And I run "script/generate pickle"
   And I run "script/generate simply_stored_scaffold book title:string description:text published:boolean"
   Then I should see the following files
 	| app/models/book.rb |
@@ -21,7 +23,7 @@ Scenario: generate a scaffold for couchdb
   And I should see "property :title , :type => String" in file "app/models/book.rb"
   And I should see "property :description" in file "app/models/book.rb"
   And I should see "property :published , :type => :boolean" in file "app/models/book.rb"
-
+  And I should successfully run "cucumber features"
 
 
 

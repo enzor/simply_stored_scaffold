@@ -8,6 +8,7 @@ class SimplyStoredScaffoldGenerator < Rails::Generator::Base
     @name = @args.first
     @attributes = []
     
+    
     @args[1..-1].each do |arg|
       if arg.include?(":")
         @attributes << [ arg.split(":")[0] , arg.split(":")[1] ]
@@ -30,10 +31,6 @@ class SimplyStoredScaffoldGenerator < Rails::Generator::Base
       m.route_resources name.downcase.pluralize
       m.directory("spec/models")
       m.template("tests/rspec/model.rb","spec/models/#{name.underscore.downcase}_spec.rb")
-      m.directory("spec/fixtures")
-      m.template("fixtures.yml","spec/fixtures/#{name.underscore.downcase.pluralize}.yml")
-      m.directory("spec/controllers")
-      m.template("tests/rspec/controller.rb","spec/controllers/#{name.underscore.downcase.pluralize}_controller_spec.rb")
     end
   end
   
@@ -75,12 +72,22 @@ class SimplyStoredScaffoldGenerator < Rails::Generator::Base
      end      
   end
   
-  def controller_methods(dir_name)
-    controller_actions.map do |action|
-      read_template("#{dir_name}/#{action}.rb")
-    end.join("  \n").strip
+  def find_default(type)
+     case type
+       when "integer"                       then 1
+       when "float"                         then 1.5
+       when "decimal"                       then "9.99"
+       when "datetime", "timestamp", "time" then Time.now.to_s(:db)
+       when "date"                          then Date.today.to_s(:db)
+       when "string"                        then "MyString"
+       when "text"                          then "MyText"
+       when "boolean"                       then false
+    else
+       ""
+    end      
   end
-  
+
+
   
   
 end

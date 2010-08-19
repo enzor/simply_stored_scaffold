@@ -3,7 +3,7 @@
 <%- for attribute in attributes -%>
   <p>
     <%%= f.label :<%= attribute[0].downcase %> %><br />
-    <%%= f.<%= find_field(attribute[1].downcase) %> :<%= attribute[0].downcase %> %>
+    <%%= f.<%= find_field(attribute[1].downcase.underscore) %> :<%= attribute[0].downcase %> %>
   </p>
 <%- end -%>
   <p>
